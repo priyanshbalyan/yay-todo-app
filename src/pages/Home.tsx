@@ -17,6 +17,9 @@ import { useToast } from "@/components/ui/use-toast";
 function Home() {
   const { toast } = useToast();
   const [text, setText] = useState("");
+  const [filterType, setFilterType] = useState<"all" | "done" | "undone">(
+    "all",
+  );
   const { createTodoItem } = useContext<TodoState>(TodoContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +35,10 @@ function Home() {
     }
   };
 
+  const handleFilterSelect = (value: "all" | "done" | "undone") => {
+    setFilterType(value);
+  };
+
   return (
     <>
       <Card className="mx-auto min-h-[440px] max-w-3xl rounded-2xl bg-[#f5f5f5] px-20 py-14">
@@ -39,7 +46,7 @@ function Home() {
           <TodoProgress />
           <div className="align-center mt-5 flex">
             <h1 className="w-full text-left text-2xl">To-dos</h1>
-            <Select>
+            <Select value={filterType} onValueChange={handleFilterSelect}>
               <SelectTrigger className="w-[180px] border-none">
                 <SelectValue placeholder="All" />
               </SelectTrigger>
@@ -64,7 +71,7 @@ function Home() {
               Add
             </Button>
           </div>
-          <TodoList />
+          <TodoList filterType={filterType} />
         </CardContent>
       </Card>
     </>
