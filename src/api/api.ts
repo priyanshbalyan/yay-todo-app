@@ -1,11 +1,3 @@
-export interface Todo {
-  _id: string;
-  text: string;
-  isDone: boolean;
-  createdAt: number;
-  username: string;
-}
-
 const BASE_URL =
   "https://nanameue-front-end-candidate-test.vercel.app/api/priyansh";
 

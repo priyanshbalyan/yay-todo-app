@@ -1,15 +1,15 @@
 import { useContext } from "react";
-import { Todo } from "@/api/api";
+import { FilterType, Todo } from "@/interfaces";
 import TodoItem from "@/components/TodoItem";
 import { TodoContext, TodoState } from "@/providers/TodoProvider";
 
 interface Props {
-  filterType: "all" | "done" | "undone";
+  filterType: FilterType;
 }
 
 function TodoList(props: Props) {
   const { filterType } = props;
-  const { isLoading, todos, deleteTodoItem, toggleTodoItem } =
+  const { todos, isLoading, deleteTodoItem, toggleTodoItem } =
     useContext<TodoState>(TodoContext);
 
   if (isLoading) {
@@ -36,15 +36,10 @@ function TodoList(props: Props) {
       {sortedTodos.map((todo: Todo) => (
         <TodoItem
           key={todo._id}
-          onDeleteClick={() => {
-            deleteTodoItem(todo._id);
-          }}
-          onCheckboxClick={() => {
-            toggleTodoItem(todo._id);
-          }}
+          onDeleteClick={() => deleteTodoItem(todo._id)}
+          onCheckboxClick={() => toggleTodoItem(todo._id)}
           title={todo.text}
           isChecked={todo.isDone}
-          disabled={isLoading}
         />
       ))}
     </>

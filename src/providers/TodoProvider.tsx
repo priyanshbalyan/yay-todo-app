@@ -1,19 +1,14 @@
-import {
-  Todo,
-  createTodo,
-  deleteTodo,
-  fetchTodos,
-  toggleTodo,
-} from "@/api/api";
+import { createTodo, deleteTodo, fetchTodos, toggleTodo } from "@/api/api";
 import { useToast } from "@/components/ui/use-toast";
+import { Todo } from "@/interfaces";
 import { createContext, useEffect, useState } from "react";
 
 export interface TodoState {
   todos: Todo[];
   isLoading: boolean;
   createTodoItem: (text: string) => Promise<void>;
-  deleteTodoItem: (id: string) => void;
-  toggleTodoItem: (id: string) => void;
+  deleteTodoItem: (id: string) => Promise<void>;
+  toggleTodoItem: (id: string) => Promise<void>;
 }
 
 export const TodoContext = createContext<TodoState>({} as TodoState);
@@ -32,7 +27,7 @@ function TodoProvider(props: Props) {
     return createTodo(text)
       .then((todo: Todo) => {
         setTodos([...todos, todo]);
-        toast({ title: "todo created" });
+        toast({ title: "To-do created" });
       })
       .catch(() => {
         toast({ title: "An error occurred while creating todo item" });
@@ -40,9 +35,9 @@ function TodoProvider(props: Props) {
   };
 
   const deleteTodoItem = (id: string) => {
-    deleteTodo(id)
+    return deleteTodo(id)
       .then((item) => {
-        toast({ title: "Todo deleted" });
+        toast({ title: "To-do deleted" });
         setTodos(todos.filter((todo) => todo._id !== item._id));
       })
       .catch(() => {
@@ -51,7 +46,7 @@ function TodoProvider(props: Props) {
   };
 
   const toggleTodoItem = (id: string) => {
-    toggleTodo(id)
+    return toggleTodo(id)
       .then((item) => {
         setTodos(
           todos.map((todo) => {
