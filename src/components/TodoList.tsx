@@ -9,10 +9,10 @@ interface Props {
 
 function TodoList(props: Props) {
   const { filterType } = props;
-  const { todos, isLoading, deleteTodoItem, toggleTodoItem } =
+  const { todos, isTodosLoading, deleteTodoItem, toggleTodoItem } =
     useContext<TodoState>(TodoContext);
 
-  if (isLoading) {
+  if (isTodosLoading) {
     return <div className="text-slate-400">Loading...</div>;
   }
 

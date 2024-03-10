@@ -5,10 +5,11 @@ import { createContext, useEffect, useState } from "react";
 
 export interface TodoState {
   todos: Todo[];
-  isLoading: boolean;
+  isTodosLoading: boolean;
   createTodoItem: (text: string) => Promise<void>;
   deleteTodoItem: (id: string) => Promise<void>;
   toggleTodoItem: (id: string) => Promise<void>;
+  allowPointerEvents: boolean;
 }
 
 export const TodoContext = createContext<TodoState>({} as TodoState);
@@ -21,9 +22,11 @@ function TodoProvider(props: Props) {
   const { toast } = useToast();
 
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isTodosLoading, setIsTodosLoading] = useState(true);
+  const [allowPointerEvents, setAllowPointerEvents] = useState(true);
 
   const createTodoItem = (text: string) => {
+    setAllowPointerEvents(false);
     return createTodo(text)
       .then((todo: Todo) => {
         setTodos([...todos, todo]);
@@ -31,10 +34,14 @@ function TodoProvider(props: Props) {
       })
       .catch(() => {
         toast({ title: "An error occurred while creating todo item" });
+      })
+      .finally(() => {
+        setAllowPointerEvents(true);
       });
   };
 
   const deleteTodoItem = (id: string) => {
+    setAllowPointerEvents(false);
     return deleteTodo(id)
       .then((item) => {
         toast({ title: "To-do deleted" });
@@ -42,10 +49,14 @@ function TodoProvider(props: Props) {
       })
       .catch(() => {
         toast({ title: "An error occurred while deleting todo item" });
+      })
+      .finally(() => {
+        setAllowPointerEvents(true);
       });
   };
 
   const toggleTodoItem = (id: string) => {
+    setAllowPointerEvents(false);
     return toggleTodo(id)
       .then((item) => {
         setTodos(
@@ -57,27 +68,34 @@ function TodoProvider(props: Props) {
       })
       .catch(() => {
         toast({ title: "An error occurred while toggling todo item state" });
+      })
+      .finally(() => {
+        setAllowPointerEvents(true);
       });
   };
 
   useEffect(() => {
+    setAllowPointerEvents(false);
     fetchTodos()
       .then((todos) => {
         setTodos(todos);
-        setIsLoading(false);
       })
       .catch(() => {
-        setIsLoading(false);
         toast({ title: "An error occurred while fetching todo items" });
+      })
+      .finally(() => {
+        setIsTodosLoading(false);
+        setAllowPointerEvents(true);
       });
   }, [toast]);
 
   const providerValues = {
     todos,
-    isLoading,
+    isTodosLoading,
     createTodoItem,
     deleteTodoItem,
     toggleTodoItem,
+    allowPointerEvents,
   };
 
   return (
