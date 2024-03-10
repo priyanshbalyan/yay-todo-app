@@ -5,3 +5,7 @@
 body {
   background-color: #d1d0d9;
 }
+
+#root {
+  padding: 0px;
+}

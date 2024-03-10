@@ -42,8 +42,8 @@ function Home() {
   };
 
   return (
-    <Card className="mx-auto my-[60px] mt-6 min-h-[440px] max-w-[720px] rounded-[20px] bg-[#f5f5f5] px-20 py-14">
-      <CardContent className="mt-4">
+    <Card className="m-4 min-h-[440px] max-w-[720px] rounded-[20px] bg-[#f5f5f5] md:mx-auto md:my-[60px]">
+      <CardContent className="px-4 py-4 md:px-24 md:py-14">
         <TodoProgress />
         <div className="align-center mt-5 flex">
           <h1 className="w-full text-left text-2xl">To-dos</h1>

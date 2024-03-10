@@ -1,3 +1,5 @@
+import { Todo } from "@/interfaces";
+
 const BASE_URL =
   "https://nanameue-front-end-candidate-test.vercel.app/api/priyansh";
 
