@@ -22,5 +22,5 @@ React - Javascript Library
 Vite - Bundler
 Eslint - Linter
 TypeScript - Type checking
-Shadcn - Headless UI component library
-TailwindCSS - To style components
+Shad-cn - Headless UI component library
+TailwindCSS - Style components

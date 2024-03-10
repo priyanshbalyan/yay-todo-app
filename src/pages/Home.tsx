@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import TodoList from "@/components/TodoList";
+import TodoList from "@/components/TodoList/TodoList";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import TodoProgress from "@/components/TodoProgress";
+import TodoProgress from "@/components/TodoProgress/TodoProgress";
 import { TodoContext, TodoState } from "@/providers/TodoProvider";
 import { useToast } from "@/components/ui/use-toast";
 import { FilterType } from "@/interfaces";

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { FilterType, Todo } from "@/interfaces";
-import TodoItem from "@/components/TodoItem";
+import TodoItem from "@/components/TodoItem/TodoItem";
 import { TodoContext, TodoState } from "@/providers/TodoProvider";
 
 interface Props {
