@@ -46,7 +46,7 @@ function Home() {
       <CardContent className="px-4 py-4 md:px-24 md:py-14">
         <TodoProgress />
         <div className="align-center mt-5 flex">
-          <h1 className="w-full text-left text-2xl">To-dos</h1>
+          <h1 className="w-full text-left text-2xl leading-9">To-dos</h1>
           <Select value={filterType} onValueChange={handleFilterSelect}>
             <SelectTrigger className="w-[135px] rounded-lg border-none">
               <SelectValue placeholder="All" />

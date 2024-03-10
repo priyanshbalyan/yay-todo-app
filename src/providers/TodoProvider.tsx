@@ -70,7 +70,7 @@ function TodoProvider(props: Props) {
         setIsLoading(false);
         toast({ title: "An error occurred while fetching todo items" });
       });
-  }, []);
+  }, [toast]);
 
   const providerValues = {
     todos,
